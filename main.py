@@ -6,7 +6,7 @@ st.write("Hello")
 st.button("Click me")
 # st.download_button("Download file", data)
 
-import streamlit as st
+
 import pandas as pd
 import numpy as np
 
