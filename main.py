@@ -1,37 +1,24 @@
-import streamlit as st
+import streamlit as st      #importing streamlit library
 
-st.header("Gemini English Grammar Check")
-st.write("Hello")
+st.header("Gemini English Grammar Check")  #title of website
+st.write("Hello")  #display a normal text
 
-st.button("Click me")
+
+if st.button("Click me"): #display a button with a message
+      st.write("Button clicked.")
 # st.download_button("Download file", data)
 
 
 import pandas as pd
-import numpy as np
-
-@st.cache_data
-def get_data():
-    df = pd.DataFrame(
-        np.random.randn(50, 20), columns=("col %d" % i for i in range(20))
-    )
-    return df
-
-@st.cache_data
-def convert_for_download(df):
-    return df.to_csv().encode("utf-8")
-
-df = get_data()
-csv = convert_for_download(df)
-
+# to create a download button
 st.download_button(
-    label="Download CSV",
-    data=csv,
-    file_name="data.csv",
-    mime="text/csv",
+    label="Download Hello World File",
+    data="Hello World",
+    file_name="data.txt",
     icon=":material/download:",
 )
 
+# create a link button
 url = 'https://docs.streamlit.io/develop/quick-reference/cheat-sheet'
 st.link_button("Go to gallery", url)
 st.page_link('https://docs.streamlit.io/develop/quick-reference/cheat-sheet', label="Home")
@@ -49,11 +36,54 @@ favorite_command = edited_df.loc[edited_df["rating"].idxmax()]["command"]
 st.markdown(f"Your favorite command is **{favorite_command}** 🎈")
 
 
-# st.data_editor("Edit data", df)
-st.checkbox("I agree")
-st.feedback("thumbs")
-st.pills("Tags", ["Sports", "Politics"])
-st.radio("Pick one", ["cats", "dogs"])
+# checkbox
+if st.checkbox("I agree"):
+      st.write("Checkbox is clicked.")
+
+# returns an integer
+my_feed = st.feedback("thumbs") 
+st.write(my_feed)
+st.feedback("stars")
+st.feedback("faces")
+
+
+p1 = st.pills("Tags", ["Sports", "Politics"])
+st.write(p1)
+
+# radio button
+r1 = st.radio("Pick one", ["cats", "dogs"], key='1')
+st.write(r1)
+
+r1 = st.radio("Pick one", ["cats", "dogs"], key='2')
+st.write(r1)
+
+# image
+st.image("https://upscfever.com/upsc-fever/assets/images/home/home-icons-100/rbi.png")
+# map
+df = pd.DataFrame(
+    {
+        "col1": [20.5937],
+        "col2": [78.9629],
+    }
+)
+st.map(df, latitude="col1", longitude="col2")
+
+# markdown
+st.markdown("*Streamlit* is **really** ***cool***.")
+st.markdown('''
+    :red[Streamlit] :orange[can] :green[write] :blue[text] :violet[in]
+    :gray[pretty] :rainbow[colors] and :blue-background[highlight] text.''')
+st.markdown("Here's a bouquet &mdash;\
+            :tulip::cherry_blossom::rose::hibiscus::sunflower::blossom:")
+
+multi = '''If you end a line with two spaces,
+a soft return is used for the next line.
+Two (or more) newline characters in a row will result in a hard return.
+'''
+st.markdown(multi)
+
+
+
 st.segmented_control("Filter", ["Open", "Closed"])
 st.toggle("Enable")
 st.selectbox("Pick one", ["cats", "dogs"])
